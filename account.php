@@ -1,3 +1,17 @@
+<?php 
+SESSION_START();
+
+if (isset($_SESSION['ses_username'])===false){
+    header("Location: index.php?logfirst");
+}
+else if (isset($_REQUEST['logout'])===true){
+    session_destroy();
+    header("Location: index.php?logout");
+}
+
+?>
+
+
 <!doctype html>
                         <html>
                             <head>
@@ -32,13 +46,15 @@ body {
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><img src="images/Profile.jpg" alt="..." width="150" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit Profile</a>
+                    <div class="profile mr-3"><img src="images/Profile.jpg" alt="..." width="150" class="rounded mb-2 img-thumbnail">
+                        <a href="?logout" class="btn btn-outline-dark btn-sm btn-block">Sign Out</a>
 
 
                     </div>
                     <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0">Rose Ann Requintel</h4>
-                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Torrijos Marinduque PH
+                        <h4 class="mt-0 mb-0"> <?php echo $_SESSION['ses_fullname']; ?> </h4>
+                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>
+                            <?php echo $_SESSION['ses_address']; ?>
                          </p>
                     </div>
                 </div>
@@ -76,6 +92,7 @@ body {
                     <div class="col-lg-6 mb-2 pl-lg-1"><img src="images/photo2.jpeg" alt="" class="img-fluid rounded shadow-sm"></div>                
                     <div class="col-lg-6 pr-lg-1 mb-2"><img src="images/photo3.jpeg" alt="" class="img-fluid rounded shadow-sm"></div>
                     <div class="col-lg-6 pl-lg-1"><img src="images/photo4.jpeg" alt="" class="img-fluid rounded shadow-sm"></div>
+                    
                 </div> 
             </div>
 
